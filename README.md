@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
-
-First, run the development server:
+## スクリプト
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# 開発サーバー
 pnpm dev
-# or
-bun dev
+# ビルド
+pnpm build
+# ビルドファイルの立ち上げ
+pnpm start
+# ユニットテスト＆ e2eテスト
+pnpm test
+# リント＆フォーマット
+pnpm fix
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ディレクトリ構成
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+- app
+  - nextjsの特殊ディレクトリ
+  - pageとapiのエンドポイントを定義する
+  - 全てspaで実装する
+- views
+  - 各ページのUI
+  - 各ページのカスタムフック
+- services
+  - バックエンドからデータをフェッチしてzodでバリデーション
+- entities
+  - Zodで型定義
+- public
+  - 静的アセット
+- components (optional)
+  - 複数ページで使いまわせるUI
+- hooks (optional)
+  - 複数ページで使いまわせる共通ロジックのカスタムフック
+...config
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 実装の手順
 
-## Learn More
+適宜issueを立てて実装していく
 
-To learn more about Next.js, take a look at the following resources:
+https://github.com/poteitoo/yumemi-spa/issues
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 内容
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. RESAS(地域経済分析システム) APIの「都道府県一覧」APIから取得する
+1. APIレスポンスから都道府県一覧のチェックボックスを動的に生成する
+1. 都道府県にチェックを入れると、RESAS APIから選択された都道府県の「人口構成」を取得する
+1. 人口構成APIレスポンスから、X軸:年、Y軸:人口数の折れ線グラフを動的に生成して表示する
+   - 「総人口」の他に「年少人口」「生産年齢人口」「老年人口」も切り替えるUIを何らかの形で用意し表示できるようにすること（同時に表示する必要はない）
 
-## Deploy on Vercel
+## 制約
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. React/Vue.jsのいずれかを用いてSPAを構築すること（バージョンはできるだけ最新版をご使用ください）
+   - Nuxt.jsやNext.jsなどの、これらを内包したフレームワークの利用も許可する
+1. Google Chrome最新版で正しく動くこと
+1. リンターやフォーマッターを適切に設定すること
+   - リンターにはESLint、フォーマッターにはPrettierを使用すること
+1. TypeScriptで記述すること
+1. テストケース/テストコードを作成すること
+   - テストツールは任意のものを用いてよい
+1. テスト実行時にエラーが発生しないこと
+1. ソースコードはGitで管理し、作成したソースコードはGitHubにアップロードすること
+1. 都道府県一覧および総人口情報はRESAS APIのデータを用いること
+1. グラフは Highcharts や Rechart.js などのサードパーティ製のグラフライブラリを用いて描画すること
+   - ただし、グラフライブラリは上記のものに限らず、任意のものを用いてよい
+1. PC/スマートフォン表示に対応すること(レスポンシブデザイン対応)
+   - ただし実機でなく、Google Chromeの検証ツールで確認できればよい
+1. styleは自分で記述し、UIフレームワークなどは原則使用しないこと
+   - chartライブラリ内包のstyle、リセット系のCSSライブラリについては利用可
+   - また、css-in-jsやcss-modules、sassなどのエコシステムの利用を妨げるものではなく、あくまでcssの記述力を測る趣旨に留まる
+1. Netlify / GitHub Pages / Firebase hosting / Vercel 等のホスティングサービスにデプロイし、インターネット経由で閲覧できる状態にし、そのURLを提出時に共有すること

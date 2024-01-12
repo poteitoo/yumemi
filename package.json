@@ -11,7 +11,9 @@
     "fix": "run-s fix:*",
     "fix:lint": "next lint --fix",
     "fix:format": "prettier --write .",
-    "test:unit": "vitest run --coverage"
+    "test": "run-s test:*",
+    "test:unit": "vitest run --coverage",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "next": "14.0.4",
@@ -19,6 +21,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.40.1",
     "@testing-library/react": "^14.1.2",
     "@types/node": "^20.11.0",
     "@types/react": "^18.2.47",

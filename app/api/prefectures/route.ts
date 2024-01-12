@@ -1,4 +1,4 @@
-import { getPrefectures } from "@/services/back/resas";
+import { getPrefectures } from "@/services/resas";
 import { NextResponse } from "next/server";
 
 export async function GET() {

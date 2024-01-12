@@ -1,9 +1,9 @@
 import {
   CompositionJpToEnLabelsSchema,
   PopulationCompositionSchemaType,
-  type FormatedPopulationCompositionSchemaType,
   FormatedPopulationCompositionSchema,
   PopulationCompositionSchema,
+  type FormatedPopulationCompositionSchemaType,
 } from "@/entities/resas";
 import * as R from "remeda";
 

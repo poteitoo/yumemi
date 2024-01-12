@@ -1,4 +1,4 @@
-import { getPopulationCompositionByPrefectureCode } from "@/services/resas";
+import { getPopulationCompositionByPrefectureCode } from "@/services/back/resas";
 import { mergePopulationCompositionByYear } from "@/utils/resas";
 import { NextResponse } from "next/server";
 

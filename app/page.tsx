@@ -1,10 +1,7 @@
-import Link from "next/link";
+"use client";
+
+import { HomePage } from "@/views/home/page";
 
 export default function Page() {
-  return (
-    <div>
-      <h1>Home</h1>
-      <Link href="/about">About</Link>
-    </div>
-  );
+  return <HomePage />;
 }

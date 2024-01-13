@@ -46,11 +46,11 @@ describe("PrefectureCheckList", () => {
     // 北海道をクリックするとチェックが外れる
     const checkbox1 = await findByLabelText("北海道");
     checkbox1.click();
-    expect(onCheckChange).toBeCalledWith("1", false);
+    expect(onCheckChange).toBeCalledWith(1, false);
 
     // 青森県をクリックするとチェックが付く
     const checkbox2 = await findByLabelText("青森県");
     checkbox2.click();
-    expect(onCheckChange).toBeCalledWith("2", true);
+    expect(onCheckChange).toBeCalledWith(2, true);
   });
 });

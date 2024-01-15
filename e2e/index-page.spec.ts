@@ -1,12 +1,26 @@
 import { test, expect } from "@playwright/test";
 
-test("should navigate to the about page", async ({ page }) => {
-  // Start from the index page (the baseURL is set via the webServer in the playwright.config.ts)
+test("都道府県のチェックボックスをクリックすると、クエリパラメータにそれがセット・削除される", async ({
+  page,
+}) => {
+  // indexページに移動
   await page.goto("/");
-  // Find an element with the text 'About' and click on it
-  await page.click("text=About");
-  // The new URL should be "/about" (baseURL is used there)
-  await expect(page).toHaveURL("/about");
-  // The new page should contain an h1 with "About"
-  await expect(page.locator("h1")).toContainText("About");
+  // チェックボックスをクリックする
+  await page.click('input[type="checkbox"][name="1"]');
+  // 001=onがURLに含まれていることを確認する
+  await expect(page).toHaveURL(/.*\?001=on/);
+
+  // チェックボックスをクリックする
+  await page.click('input[type="checkbox"][name="1"]');
+  // 001=onがURLに含まれていないことを確認する
+  await expect(page).not.toHaveURL(/.*\?001=on/);
+});
+
+test("クエリーパラメータがセットされていたら、都道府県のチェックボックスはチェックされている", async ({
+  page,
+}) => {
+  // indexページにクエリパラメータ付きで移動
+  await page.goto("/?001=on");
+  // チェックボックスがチェックされていることを確認する
+  await expect(page.locator('input[type="checkbox"][name="1"]')).toBeChecked();
 });

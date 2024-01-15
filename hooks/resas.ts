@@ -2,24 +2,24 @@ import {
   getAllPrefectures,
   getPopulationCompositionsByPrefectureCodes,
 } from "@/services/front/resas";
-import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
 
 export const usePrefectures = () => {
   const {
     data: prefectures,
-    error,
-    isLoading,
-  } = useSWR("/api/prefectures", getAllPrefectures);
-  return { prefectures, error, isLoading };
+    mutate: _mutate,
+    ...others
+  } = useSWRImmutable("/api/prefectures", getAllPrefectures);
+  return { prefectures, ...others };
 };
 
 export const usePopulationCompositions = (prefCodes: number[]) => {
   const {
     data: populationCompositions,
-    error,
-    isLoading,
-  } = useSWR(prefCodes, (prefCodes) =>
+    mutate: _mutate,
+    ...others
+  } = useSWRImmutable(prefCodes, (prefCodes) =>
     getPopulationCompositionsByPrefectureCodes(prefCodes),
   );
-  return { populationCompositions, error, isLoading };
+  return { populationCompositions, ...others };
 };

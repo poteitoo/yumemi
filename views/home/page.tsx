@@ -1,19 +1,22 @@
-import Link from "next/link";
 import { PrefectureCheckList } from "./prefecutre-check-list";
 import { useHomePage } from "./hooks";
+import { PopulationChart } from "./population-chart";
 
 export function HomePage() {
-  const { prefectures, checkedPrefCodes, handleCheckedPrefectureChange } =
-    useHomePage();
+  const {
+    prefectures,
+    checkedPrefCodes,
+    populationCompositions,
+    handleCheckedPrefectureChange,
+  } = useHomePage();
   return (
-    <div>
+    <div style={{ height: "50vh", width: "50%" }}>
       <PrefectureCheckList
         prefectures={prefectures}
         checkedPrefCodes={checkedPrefCodes}
         onCheckChange={handleCheckedPrefectureChange}
       />
-      <h1>Home</h1>
-      <Link href="/about">About</Link>
+      <PopulationChart population={populationCompositions} />
     </div>
   );
 }

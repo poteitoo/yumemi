@@ -1,7 +1,5 @@
-"use client";
-
 import { usePopulationCompositions, usePrefectures } from "@/hooks/resas";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export const useHomePage = () => {
@@ -9,23 +7,27 @@ export const useHomePage = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [checkedPrefCodes, setCheckedPrefCodes] = useState<number[]>([]);
-  const { prefectures, error, isLoading } = usePrefectures();
-  const { populationCompositions } =
-    usePopulationCompositions(checkedPrefCodes);
+  const { prefectures, isLoading: isPrefectureLoading } = usePrefectures();
+  const {
+    populationCompositions: _populationCompositions,
+    isLoading: isPopulationCompositionLoading,
+  } = usePopulationCompositions(checkedPrefCodes);
 
-  const handleCheckedPrefectureChange = useCallback(
-    // クエリパラメータに選択された都道府県のコードをセット
-    (prefCode: number, isChecked: boolean) => {
-      const queryParams = new URLSearchParams(searchParams);
-      if (isChecked) {
-        queryParams.set(prefCode.toString(), "on");
-      } else {
-        queryParams.delete(prefCode.toString());
-      }
-      router.replace(`${pathname}?${queryParams.toString()}`);
-    },
-    [router, pathname, searchParams],
-  );
+  const _prefectureCodeToJpMap = useMemo(() => {
+    const prefectureCodeJp = new Map<number, string>();
+    prefectures?.forEach((prefecture) => {
+      prefectureCodeJp.set(prefecture.prefCode, prefecture.prefName);
+    });
+    return prefectureCodeJp;
+  }, [prefectures]);
+
+  const populationCompositions = useMemo(() => {
+    return _populationCompositions?.map(({ data, prefCode }) => ({
+      data,
+      prefCode,
+      prefName: _prefectureCodeToJpMap.get(prefCode),
+    }));
+  }, [_populationCompositions, _prefectureCodeToJpMap]);
 
   useEffect(() => {
     // クエリパラメータからチェックされている都道府県のコードを取得
@@ -35,14 +37,30 @@ export const useHomePage = () => {
         .filter(
           ([key, value]) => Number.isInteger(parseInt(key)) && value === "on",
         )
-        .map(([key, value]) => parseInt(key)),
+        .map(([key, _value]) => parseInt(key)),
     );
   }, [searchParams]);
 
+  const handleCheckedPrefectureChange = useCallback(
+    // クエリパラメータに選択された都道府県のコードをセット
+    (prefCode: number, isChecked: boolean) => {
+      const queryParams = new URLSearchParams(searchParams);
+      if (isChecked) {
+        queryParams.set(prefCode.toString().padStart(3, "0"), "on");
+      } else {
+        queryParams.delete(prefCode.toString().padStart(3, "0"));
+      }
+      queryParams.sort();
+      router.replace(`${pathname}?${queryParams.toString()}`);
+    },
+    [router, pathname, searchParams],
+  );
+
   return {
     prefectures,
-    error,
-    isLoading,
+    isPrefectureLoading,
+    isPopulationCompositionLoading,
+    isLoading: isPrefectureLoading || isPopulationCompositionLoading,
     populationCompositions,
     checkedPrefCodes,
     handleCheckedPrefectureChange,

@@ -1,4 +1,4 @@
-## セットアップ
+## 開発環境のセットアップ
 ```bash
 # クローン
 git clone https://github.com/poteitoo/yumemi
@@ -10,6 +10,23 @@ npm i -g pnpm
 pnpm i
 # 環境変数の設定 (RESASのAPIキーを取得する必要があります)
 mv .env.template .env.local
+# 開発サーバを起動する
+pnpm dev
+```
+
+## スクリプト
+
+```bash
+# 開発サーバー
+pnpm dev
+# ビルド
+pnpm build
+# ビルドファイルの立ち上げ
+pnpm start
+# ユニットテスト＆ e2eテスト
+pnpm test
+# リント＆フォーマット
+pnpm fix
 ```
 
 ## ディレクトリ構成
@@ -35,20 +52,7 @@ mv .env.template .env.local
 ...config
 ```
 
-## スクリプト
 
-```bash
-# 開発サーバー
-pnpm dev
-# ビルド
-pnpm build
-# ビルドファイルの立ち上げ
-pnpm start
-# ユニットテスト＆ e2eテスト
-pnpm test
-# リント＆フォーマット
-pnpm fix
-```
 
 ## 実装の手順
 

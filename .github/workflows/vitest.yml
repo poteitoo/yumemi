@@ -29,3 +29,6 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           files: ./coverage/coverage-final.json
+      - name: report coverage
+        if: always()
+        uses: davelosert/vitest-coverage-report-action@v2

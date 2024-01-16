@@ -10,7 +10,7 @@ npm i -g pnpm
 # 依存のインストール
 pnpm i
 # 環境変数の設定 (RESASのAPIキーを取得する必要があります)
-mv .env.template .env.local
+cp .env.template .env.local
 # 開発サーバを起動する
 pnpm dev
 ```

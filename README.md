@@ -1,16 +1,15 @@
-## スクリプト
-
+## セットアップ
 ```bash
-# 開発サーバー
-pnpm dev
-# ビルド
-pnpm build
-# ビルドファイルの立ち上げ
-pnpm start
-# ユニットテスト＆ e2eテスト
-pnpm test
-# リント＆フォーマット
-pnpm fix
+# クローン
+git clone https://github.com/poteitoo/yumemi
+# ディレクトリに移動
+cd yumemi
+# pnpmをインストールしていない場合 (optional)
+npm i -g pnpm
+# 依存のインストール
+pnpm i
+# 環境変数の設定 (RESASのAPIキーを取得する必要があります)
+mv .env.template .env.local
 ```
 
 ## ディレクトリ構成
@@ -34,6 +33,21 @@ pnpm fix
 - hooks (optional)
   - 複数ページで使いまわせる共通ロジックのカスタムフック
 ...config
+```
+
+## スクリプト
+
+```bash
+# 開発サーバー
+pnpm dev
+# ビルド
+pnpm build
+# ビルドファイルの立ち上げ
+pnpm start
+# ユニットテスト＆ e2eテスト
+pnpm test
+# リント＆フォーマット
+pnpm fix
 ```
 
 ## 実装の手順

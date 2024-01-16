@@ -3,6 +3,7 @@ import {
   CompositionEnToJpLabelKeys,
 } from "@/entities/resas";
 import style from "./styles.module.css";
+import { useMemo } from "react";
 
 type Props = {
   category: CompositionEnToJpLabelKeys;
@@ -10,11 +11,11 @@ type Props = {
 };
 
 export const CategoryRadioList = ({ category, onCategoryChange }: Props) => {
-  const rand = crypto.getRandomValues(new Uint8Array(1));
+  const rand = useMemo(() => crypto.getRandomValues(new Uint8Array(1)), []);
   return (
-    <form className={style.container}>
+    <div className={style.container}>
       {Object.entries(COMPOSITION_EN_TO_JP_LABELS).map(([en, jp]) => (
-        <div key={en}>
+        <label htmlFor={`${rand}${en}`} key={en} className={style.radio_group}>
           <input
             type="radio"
             id={`${rand}${en}`}
@@ -25,9 +26,9 @@ export const CategoryRadioList = ({ category, onCategoryChange }: Props) => {
               onCategoryChange(e.target.value as CompositionEnToJpLabelKeys)
             }
           />
-          <label htmlFor={`${rand}${en}`}>{jp}</label>
-        </div>
+          <span>{jp}</span>
+        </label>
       ))}
-    </form>
+    </div>
   );
 };

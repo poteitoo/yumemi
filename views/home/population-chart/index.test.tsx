@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom/vitest";
-import { describe, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { render } from "@testing-library/react";
 import { PopulationChart } from ".";
 
@@ -23,5 +23,16 @@ describe("PopulationChart", () => {
         category="total"
       />,
     );
+  });
+
+  it("populationが空の時ヒントが表示される", async () => {
+    const { findByText } = render(
+      <PopulationChart
+        population={[]}
+        category="total"
+        hint="テスト用ヒント"
+      />,
+    );
+    expect(await findByText("テスト用ヒント")).toBeDefined();
   });
 });

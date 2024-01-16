@@ -1,5 +1,6 @@
 import { PrefectureSchemaType } from "@/entities/resas";
 import style from "./styles.module.css";
+import { useMemo } from "react";
 
 type Props = {
   prefectures?: PrefectureSchemaType[];
@@ -12,11 +13,15 @@ export const PrefectureCheckList = ({
   checkedPrefCodes,
   onCheckChange,
 }: Props) => {
-  const rand = crypto.getRandomValues(new Uint8Array(1));
+  const rand = useMemo(() => crypto.getRandomValues(new Uint8Array(1)), []);
   return (
-    <form className={style.container}>
+    <div className={style.container}>
       {prefectures?.map(({ prefName, prefCode }) => (
-        <div key={prefCode}>
+        <label
+          className={style.checkbox_group}
+          htmlFor={`${rand}${prefCode}`}
+          key={prefCode}
+        >
           <input
             type="checkbox"
             id={`${rand}${prefCode}`}
@@ -24,9 +29,9 @@ export const PrefectureCheckList = ({
             checked={checkedPrefCodes.includes(prefCode)}
             onChange={(e) => onCheckChange(prefCode, e.target.checked)}
           />
-          <label htmlFor={`${rand}${prefCode}`}>{prefName}</label>
-        </div>
+          {prefName}
+        </label>
       ))}
-    </form>
+    </div>
   );
 };

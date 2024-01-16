@@ -1,4 +1,36 @@
+@media screen and (min-width: 768px) {
+  .container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 .container {
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+}
+.radio_group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.radio_group:hover {
+  background-color: #f0f0f0;
+}
+.radio_group input[type="radio"] {
+  display: none;
+}
+.radio_group input[type="radio"] + span {
+  padding: 5px 10px;
+}
+.radio_group input[type="radio"]:checked + span {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+.radio_group label {
+  margin: 0;
+  padding: 0;
 }

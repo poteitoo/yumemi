@@ -20,6 +20,7 @@ describe("PopulationChart", () => {
             data: [{ year: 2000, total: 1000 }],
           },
         ]}
+        category="total"
       />,
     );
   });

@@ -24,3 +24,30 @@ test("クエリーパラメータがセットされていたら、都道府県�
   // チェックボックスがチェックされていることを確認する
   await expect(page.locator('input[type="checkbox"][name="1"]')).toBeChecked();
 });
+
+test("カテゴリーのラジオボタンをクリックすると、クエリパラメータにそれがセット・削除される", async ({
+  page,
+}) => {
+  // indexページに移動
+  await page.goto("/");
+  // 老年人口をクリックする
+  await page.click('input[type="radio"][value="elderly"]');
+  // category=elderlyがURLに含まれていることを確認する
+  await expect(page).toHaveURL(/.*\?category=elderly/);
+
+  // 年少人口をクリックする
+  await page.click('input[type="radio"][value="young"]');
+  // category=elderlyがURLに含まれていないことを確認する
+  await expect(page).not.toHaveURL(/.*\?category=elderly/);
+});
+
+test("クエリーパラメータがセットされていたら、カテゴリーのラジオボタンはチェックされている", async ({
+  page,
+}) => {
+  // indexページにクエリパラメータ付きで移動
+  await page.goto("/?category=elderly");
+  // ラジオボタンがチェックされていることを確認する
+  await expect(
+    page.locator('input[type="radio"][value="elderly"]'),
+  ).toBeChecked();
+});

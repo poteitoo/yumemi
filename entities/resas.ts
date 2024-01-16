@@ -45,6 +45,20 @@ export const CompositionJpToEnLabelsSchema = z.nativeEnum(
 export type CompositionJpToEnLabelsSchemaType = z.infer<
   typeof CompositionJpToEnLabelsSchema
 >;
+export enum COMPOSITION_EN_TO_JP_LABELS {
+  "total" = "総人口",
+  "young" = "年少人口",
+  "productive" = "生産年齢人口",
+  "elderly" = "老年人口",
+}
+export const CompositionEnToJpLabelsSchema = z.nativeEnum(
+  COMPOSITION_EN_TO_JP_LABELS,
+);
+export type CompositionEnToJpLabelsSchemaType = z.infer<
+  typeof CompositionEnToJpLabelsSchema
+>;
+export type CompositionEnToJpLabelKeys =
+  keyof typeof COMPOSITION_EN_TO_JP_LABELS;
 
 export const FormatedPopulationCompositionSchema = z.object({
   total: z.number().optional(),

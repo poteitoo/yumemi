@@ -1,3 +1,20 @@
+## 開発環境のセットアップ
+
+```bash
+# クローン
+git clone https://github.com/poteitoo/yumemi
+# ディレクトリに移動
+cd yumemi
+# pnpmをインストールしていない場合 (optional)
+npm i -g pnpm
+# 依存のインストール
+pnpm i
+# 環境変数の設定 (RESASのAPIキーを取得する必要があります)
+mv .env.template .env.local
+# 開発サーバを起動する
+pnpm dev
+```
+
 ## スクリプト
 
 ```bash
@@ -24,7 +41,10 @@ pnpm fix
   - 各ページのUI
   - 各ページのカスタムフック
 - services
-  - バックエンドからデータをフェッチしてzodでバリデーション
+  - back
+    - バックエンドのサービス層の記述(apiのfetcher)
+  - front
+    - フロントエンドのサービス層の記述(apiのfetcher)
 - entities
   - Zodで型定義
 - public
@@ -33,6 +53,10 @@ pnpm fix
   - 複数ページで使いまわせるUI
 - hooks (optional)
   - 複数ページで使いまわせる共通ロジックのカスタムフック
+- e2e
+  - e2eテストの記述
+- .github
+  - github actionsの設定（e2e test・unit testの実行）
 ...config
 ```
 

@@ -34,7 +34,9 @@ export function HomePage() {
       <PopulationChart
         population={populationCompositions}
         category={checkedCategory}
-        hint="都道府県を選択してください。"
+        hint={
+          isPopulationCompositionLoading ? "" : "都道府県を選択してください。"
+        }
       />
     </div>
   );

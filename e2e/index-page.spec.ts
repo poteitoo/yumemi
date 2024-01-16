@@ -31,12 +31,12 @@ test("カテゴリーのラジオボタンをクリックすると、クエリ�
   // indexページに移動
   await page.goto("/");
   // 老年人口をクリックする
-  await page.click('input[type="radio"][value="elderly"]');
+  await page.click("text=老年人口");
   // category=elderlyがURLに含まれていることを確認する
   await expect(page).toHaveURL(/.*\?category=elderly/);
 
   // 年少人口をクリックする
-  await page.click('input[type="radio"][value="young"]');
+  await page.click("text=年少人口");
   // category=elderlyがURLに含まれていないことを確認する
   await expect(page).not.toHaveURL(/.*\?category=elderly/);
 });

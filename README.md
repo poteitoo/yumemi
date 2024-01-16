@@ -1,3 +1,5 @@
+![codecov](https://codecov.io/gh/poteitoo/yumemi/branch/main/graph/badge.svg)
+
 ## 開発環境のセットアップ
 
 ```bash

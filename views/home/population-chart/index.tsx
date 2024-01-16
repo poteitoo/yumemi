@@ -12,6 +12,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
+import style from "./styles.module.css";
 
 type Props = {
   population?: {
@@ -25,24 +26,26 @@ type Props = {
 
 export const PopulationChart = ({ population, category }: Props) => {
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <LineChart margin={{ top: 5, right: 20, bottom: 5, left: 30 }}>
-        {population?.map(({ prefCode, data, prefName, color }) => (
-          <Line
-            isAnimationActive={false}
-            key={prefCode}
-            data={data}
-            dataKey={category}
-            name={prefName}
-            stroke={color}
-          />
-        ))}
-        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-        <Legend verticalAlign="bottom" height={36} />
-        <XAxis dataKey="year" type="number" domain={["auto", "auto"]} />
-        <YAxis />
-        <Tooltip />
-      </LineChart>
-    </ResponsiveContainer>
+    <div className={style.container}>
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart margin={{ top: 5, right: 20, bottom: 5, left: 30 }}>
+            {population?.map(({ prefCode, data, prefName, color }) => (
+              <Line
+                isAnimationActive={false}
+                key={prefCode}
+                data={data}
+                dataKey={category}
+                name={prefName}
+                stroke={color}
+              />
+            ))}
+            <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+            <Legend verticalAlign="bottom" height={36} />
+            <XAxis dataKey="year" type="number" domain={["auto", "auto"]} />
+            <YAxis />
+            <Tooltip />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
   );
 };

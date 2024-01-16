@@ -1,6 +1,6 @@
 [![Build Status](https://github.com/poteitoo/yumemi/actions/workflows/playwright.yml/badge.svg?branch=main)](https://github.com/poteitoo/yumemi/actions?query=branch%3Amain)
 [![Coverage Status](https://github.com/poteitoo/yumemi/actions/workflows/vitest.yml/badge.svg?branch=main)](https://github.com/poteitoo/yumemi/actions?query=branch%3Amain)
-![codecov](https://codecov.io/gh/poteitoo/yumemi/branch/main/graph/badge.svg)
+[![codecov](https://codecov.io/gh/poteitoo/yumemi/graph/badge.svg?token=YZNTHT1MGC)](https://codecov.io/gh/poteitoo/yumemi)
 
 ## 開発環境のセットアップ
 

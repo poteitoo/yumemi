@@ -25,6 +25,7 @@ jobs:
         run: npm install -g pnpm && pnpm install
       - name: Run vitest unit tests
         run: pnpm test:unit
-      - name: report coverage
-        if: always()
-        uses: davelosert/vitest-coverage-report-action@v2
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage/coverage-final.json
